@@ -1,0 +1,87 @@
+name: e2e_web
+description: End-to-end file encryption (client-side) with share-first flow for Android.
+publish_to: "none"
+
+version: 1.1.0+2
+
+environment:
+  sdk: ">=3.6.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cryptography: ^2.9.0
+  file_picker: ^10.3.10
+  share_plus: ^12.0.1
+  path_provider: ^2.1.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^6.0.0
+
+  # App icon generator (Android/iOS/Web/Windows)
+  flutter_launcher_icons: ^0.14.4
+
+  # MSIX packaging for Windows / Microsoft Store
+  msix: ^3.16.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/logo.png
+
+# -----------------------------
+# Launcher icons (all platforms)
+# -----------------------------
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/logo.png"
+
+  # Generate Windows runner icon
+  windows:
+    generate: true
+    image_path: "assets/logo.png"
+    icon_size: 256
+
+  web:
+    generate: true
+    image_path: "assets/logo.png"
+    background_color: "#121212"
+    theme_color: "#121212"
+
+# --------------------------------------------
+# Microsoft Store / MSIX packaging configuration
+# (Values from your "View product identity" screenshot)
+# --------------------------------------------
+msix_config:
+  # What users see (must match the name you reserved in Partner Center)
+  display_name: "E2E File encryption"
+  publisher_display_name: "cyph3r"
+
+  # MUST match Partner Center "Package/Identity"
+  identity_name: "cyph3r.E2EFileencryption"
+  publisher: "CN=7456A62D-B4E5-49F3-9485-ADF80146DE6A"
+
+  # Store requires Revision (4th) = 0
+  # Map Dart build +2 into the 3rd field:
+  msix_version: "1.1.2.0"
+
+  # App branding
+  logo_path: "assets/logo.png"
+
+  # Target arch
+  architecture: "x64"
+
+  # Capabilities (safe default)
+  capabilities: "internetClient"
+
+  # Store signs the package
+  sign_msix: false
+
+  # References (not required by msix tool; for your records)
+  # package_family_name: "cyph3r.E2EFileencryption_fb6bh328pz6dt"
+  # store_id: "9NCQ20PD63HC"
