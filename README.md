@@ -85,7 +85,7 @@ Based on our analytics from the testing period:
 ## ⚙️ Installation
 ```bash
 # Clone the repository
-git clone <your-repo-url>
+git clone https://github.com/simonchitepo/file-encryption
 
 # Navigate into project
 cd end_to_end_encryption
