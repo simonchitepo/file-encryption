@@ -18,11 +18,7 @@ A cross-platform Flutter application that provides client-side end-to-end file e
 ---
 
 ## 🎥 Visuals
-| File Selection | Encryption Process | Share/Download |
-| :---: | :---: | :---: |
-| ![UI](https://via.placeholder.com/200x400?text=File+Selection) | ![Processing](https://via.placeholder.com/200x400?text=Encrypting...) | ![Export](https://via.placeholder.com/200x400?text=Share+Sheet) |
 
----
 ![visuals](image.png)
 
 ## ✨ Key Features
@@ -52,104 +48,16 @@ Before running the project, ensure you have:
 * A physical device or emulator
 
 ## System Architecture
-flowchart TD
-    A[User] --> B[Flutter UI]
-    B --> C[Encryption Service]
-    B --> D[File Picker]
-
-    C --> E[Encrypt File]
-    C --> F[Decrypt File]
-
-    E --> G[Temporary Storage]
-    F --> G
-
-    G --> H{Platform}
-    H -->|Web| I[Download File]
-    H -->|Mobile| J[Share File]
-
-    D --> B
+![system](image-1.png)
 ## Component Diagram
-graph TD
-    UI[Presentation Layer\nFlutter Widgets]
+![component](image-2.png)
 
-    Logic[Business Logic\nEncryption/Decryption]
-
-    FileService[File Handling\nRead/Write Temp Files]
-
-    Platform[Platform Service\nWeb/Mobile Export]
-
-    UI --> Logic
-    UI --> FileService
-    Logic --> FileService
-    FileService --> Platform
 ## Sequence Diagram(Encryption Flow) 
-sequenceDiagram
-    participant User
-    participant UI
-    participant Encryptor
-    participant FileSystem
-
-    User->>UI: Select File
-    UI->>FileSystem: Read File Bytes
-    UI->>Encryptor: Send Data for Encryption
-    Encryptor-->>UI: Encrypted Data
-    UI->>FileSystem: Save Temp File
-    UI->>User: Download / Share File
+![sequence](image-3.png)
 ## Sequence Diagram (Decryption Flow)
-sequenceDiagram
-    participant User
-    participant UI
-    participant Decryptor
-    participant FileSystem
-
-    User->>UI: Upload Encrypted File
-    UI->>FileSystem: Read File Bytes
-    UI->>Decryptor: Send Data for Decryption
-    Decryptor-->>UI: Decrypted Data
-    UI->>FileSystem: Save Output File
-    UI->>User: Download / Share File
+![sequence2](image-4.png)
 ## Class Diagram
-classDiagram
-    class FileService {
-        +readFile()
-        +writeTempFile()
-    }
-
-    class EncryptionService {
-        +encrypt(data)
-        +decrypt(data)
-    }
-
-    class PlatformService {
-        +downloadFile()
-        +shareFile()
-    }
-
-    class UI {
-        +selectFile()
-        +triggerEncryption()
-        +triggerDecryption()
-    }
-
-    UI --> EncryptionService
-    UI --> FileService
-    FileService --> PlatformService
-## ⚙️ Installation
-```bash
-# Clone the repository
-git clone <your-repo-url>
-
-# Navigate into project
-cd end_to_end_encryption
-
-# Generate platform folders
-flutter create .
-
-# Install dependencies
-flutter pub get
-
-# Run the app
-flutter run
+![class](image-5.png)
 
 ## 🧪 Case Study: Conversion & Performance Analysis
 
@@ -168,8 +76,25 @@ Based on our analytics from the testing period:
 | **Successful Installs** | 25 | 92.5% (Attempt Success) |
 | **First Time Launches** | 10 | 40.0% (Install to Launch) |
 
+![stats](image-6.png)
 ### Analysis & Solution
 * **High Technical Reliability:** The **92.5% install success rate** proved that the Flutter build was stable across different OS versions.
 * **The "Launch Gap":** We noticed a significant drop between *Successful Installs* (25) and *First Time Launches* (10). 
 * **The Fix:** We identified that the initial "Key Generation" process was taking too long on older mobile devices, causing users to close the app before the UI fully loaded.
 * **Result:** We implemented **Isolate-based background processing** for the cryptographic setup. This ensured the UI remained responsive immediately upon launch, significantly reducing the "bounce rate" in subsequent internal tests.
+## ⚙️ Installation
+```bash
+# Clone the repository
+git clone <your-repo-url>
+
+# Navigate into project
+cd end_to_end_encryption
+
+# Generate platform folders
+flutter create .
+
+# Install dependencies
+flutter pub get
+
+# Run the app
+flutter run
