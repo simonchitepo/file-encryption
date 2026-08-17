@@ -98,3 +98,13 @@ flutter pub get
 
 # Run the app
 flutter run
+
+## Security Controls
+
+| Control ID | Category | Description | Implementation | Status |
+|---|---|---|---|---|
+| SC-01 | Encryption at Rest | Strong symmetric encryption | AES-256-GCM for file contents | Implemented |
+| SC-02 | Key Derivation | Resist brute-force on PIN/key | PBKDF2-HMAC-SHA with adequate iteration count and salt | Implemented |
+| SC-03 | Integrity | Detect tampering | GCM authentication tag verified on decrypt | Implemented |
+| SC-04 | Local-Only Processing | No plaintext leaves device | All encrypt/decrypt operations performed locally, no upload | Implemented |
+| SC-05 | Key/PIN Handling | Prevent key exposure | PIN never logged, cleared from memory after use | In progress |
