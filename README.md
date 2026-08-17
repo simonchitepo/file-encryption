@@ -108,3 +108,12 @@ flutter run
 | SC-03 | Integrity | Detect tampering | GCM authentication tag verified on decrypt | Implemented |
 | SC-04 | Local-Only Processing | No plaintext leaves device | All encrypt/decrypt operations performed locally, no upload | Implemented |
 | SC-05 | Key/PIN Handling | Prevent key exposure | PIN never logged, cleared from memory after use | In progress |
+
+## Risk Register
+
+| Risk ID | Description | Likelihood | Impact | Mitigation | Status |
+|---|---|---|---|---|---|
+| RR-01 | Weak or reused PIN makes brute-forcing key derivation feasible | Medium | High | Enforce PIN/passphrase strength, high PBKDF2 iteration count | Open |
+| RR-02 | PIN or derived key retained in memory/swap longer than necessary | Low | Medium | Zero out sensitive buffers after use where platform allows | Open |
+| RR-03 | Nonce reuse in AES-GCM across encryptions compromises confidentiality | Low | High | Ensure unique nonce per encryption operation, verified in tests | Open |
+| RR-04 | User loses PIN and has no recovery path for encrypted files | High | Medium | Document that loss of PIN = permanent data loss; no backdoor by design | Open |
